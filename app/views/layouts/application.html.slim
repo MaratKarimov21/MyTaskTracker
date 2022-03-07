@@ -11,4 +11,9 @@ html
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   body
-    = yield
+    #wrapper.d-flex
+      = render 'partials/sidebar'
+      #page-content-wrapper
+        = render 'partials/topbar'
+        .container-fluid
+          = yield
