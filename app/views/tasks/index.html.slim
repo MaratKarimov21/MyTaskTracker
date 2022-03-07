@@ -1,3 +1,4 @@
 - @tasks.each do |task|
   h1
-    = task.title
+    = render 'task', task: task
+
