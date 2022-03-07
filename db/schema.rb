@@ -10,16 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_07_104032) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_07_182946) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "tasks", force: :cascade do |t|
-    t.string "title"
-    t.bigint "user_id", null: false
+  create_table "blockers", force: :cascade do |t|
+    t.bigint "blocker_id"
+    t.bigint "blocked_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_tasks_on_user_id"
+    t.index ["blocked_id", "blocker_id"], name: "index_blockers_on_blocked_id_and_blocker_id", unique: true
+    t.index ["blocked_id"], name: "index_blockers_on_blocked_id"
+    t.index ["blocker_id"], name: "index_blockers_on_blocker_id"
+  end
+
+  create_table "task_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "task_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id", "user_id"], name: "index_task_users_on_task_id_and_user_id", unique: true
+    t.index ["task_id"], name: "index_task_users_on_task_id"
+    t.index ["user_id"], name: "index_task_users_on_user_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "title"
+    t.bigint "requester_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["requester_id"], name: "index_tasks_on_requester_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -34,5 +54,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_07_104032) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "tasks", "users"
+  add_foreign_key "blockers", "tasks", column: "blocked_id"
+  add_foreign_key "blockers", "tasks", column: "blocker_id"
+  add_foreign_key "task_users", "tasks"
+  add_foreign_key "task_users", "users"
+  add_foreign_key "tasks", "users", column: "requester_id"
 end
