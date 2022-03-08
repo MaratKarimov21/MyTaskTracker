@@ -11,7 +11,8 @@
       .card-header
         | Owners:
       .card-body
-        p some owners of the task
+        - @task.owners.each do |owner|
+          p #{owner.decorate.full_name}
 
 br
 h5 comments:
