@@ -1,7 +1,23 @@
 .card
   .card-header
-    | Featured
+    | ID: #123543
   .card-body
-    h5.card-title Special title treatment
-    p.card-text With supporting text below as a natural lead-in to additional content.
-    a.btn.btn-primary href="#"  Go somewhere
+    .task-card-content
+      h5.card-title The title will be located here
+      p.card-text The description will be here. With supporting text below as a natural lead-in to additional content.
+      a.btn.btn-primary href="#" Change status
+      a.btn.btn-success href="#" Edit
+    .task-card-options.card.owners
+      .card-header
+        | Owners:
+      .card-body
+        p some owners of the task
+
+br
+h5 comments:
+.card
+  .card-body
+    p.card-text some comment
+.card
+  .card-body
+    p.card-text some answer
