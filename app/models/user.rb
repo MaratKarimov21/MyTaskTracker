@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :first_name, :last_name, presence: true
+
   has_many :task_users, dependent: :destroy
   has_many :tasks, through: :task_users
   has_many :requested_tasks, class_name: "Task", foreign_key: "requester_id",
