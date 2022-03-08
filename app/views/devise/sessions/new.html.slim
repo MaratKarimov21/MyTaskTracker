@@ -1,18 +1,21 @@
-h2
-  | Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-  br
-  = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-  br
-  = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+.form-container
+  body.text-center
+    main.form-signin
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        h1.h3.mb-3.fw-normal Please sign in
+        .form-floating
+        = f.email_field :email, autofocus: true, plaseholder: "name@example.com", class: '#floatingInput form-control'
+        label for="floatingInput"  Email address
+
+        .form-floating
+        = f.password_field :password, placeholder: "Password", class: '#floatingInput form-control'
+        label for="floatingPassword"  Password
+
+        .checkbox.mb-3
+          label
+                = f.check_box :remember_me
+                | Remember me
+        .actions
+          = f.submit "Sign in", class: 'w-100 btn btn-lg btn-primary'
+        p.mt-5.mb-3.text-muted © 2017–2022
+      = render "devise/shared/links"
