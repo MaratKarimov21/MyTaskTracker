@@ -1,8 +1,7 @@
 .card
   .card-header
-    span.badge.rounded-pill.bg-primary label
-    span.badge.rounded-pill.bg-success label2
-    span.badge.rounded-pill.bg-warning.text-dark blocked
+    - task.labels.each do |label|
+      span class=('badge rounded-pill ' + label.color) #{label.title}
   .card-body
     .task-card-content
       p.lead #{task.title}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_07_182946) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_08_085109) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_07_182946) do
     t.index ["blocked_id", "blocker_id"], name: "index_blockers_on_blocked_id_and_blocker_id", unique: true
     t.index ["blocked_id"], name: "index_blockers_on_blocked_id"
     t.index ["blocker_id"], name: "index_blockers_on_blocker_id"
+  end
+
+  create_table "labels", force: :cascade do |t|
+    t.string "color"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "task_labels", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.bigint "label_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["label_id"], name: "index_task_labels_on_label_id"
+    t.index ["task_id", "label_id"], name: "index_task_labels_on_task_id_and_label_id", unique: true
+    t.index ["task_id"], name: "index_task_labels_on_task_id"
   end
 
   create_table "task_users", force: :cascade do |t|
@@ -58,6 +75,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_07_182946) do
 
   add_foreign_key "blockers", "tasks", column: "blocked_id"
   add_foreign_key "blockers", "tasks", column: "blocker_id"
+  add_foreign_key "task_labels", "labels"
+  add_foreign_key "task_labels", "tasks"
   add_foreign_key "task_users", "tasks"
   add_foreign_key "task_users", "users"
   add_foreign_key "tasks", "users", column: "requester_id"
