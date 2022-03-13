@@ -1,0 +1,23 @@
+/ .card
+/   .card-body
+/     = form_with model: task do |f|
+/       .mb-3.row
+/         .col-sm-2.col-form-label
+/           = f.label :title
+/       = f.submit 'Save', class: 'btn btn-primary'
+.modal style='display: inline-block; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4);' data-controller="modal" data-action="keyup@document->modal#handleKeyup"
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        h5.modal-title New Task
+        button.btn-close aria-label="Close" type="button" data-action="click->modal#close">
+      .modal-body
+        = form_with model: @task do |form|
+          .mb-3
+            = form.label 'title', class: 'form-label'
+            = form.text_field :title, class: 'form-control'
+          .mb-3
+            = form.label 'description', class: 'form-label'
+            = form.text_area :description, class: 'form-control'
+          .modal-footer
+            = form.submit 'Save', class: 'btn btn-primary'

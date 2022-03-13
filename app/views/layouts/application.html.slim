@@ -18,6 +18,7 @@ html
         #page-content-wrapper
           = render 'partials/topbar'
           .container-fluid
+            = turbo_frame_tag "modal"
             = yield
   - else
     = yield

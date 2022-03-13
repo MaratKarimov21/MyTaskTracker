@@ -1,4 +1,4 @@
-- @tasks.each do |task|
-  h1
-    = render 'task', task: task
-
+= turbo_frame_tag "tasks" do
+  - @tasks.each do |task|
+    h1
+      = render 'task', task: task
