@@ -11,6 +11,8 @@ gem "slim-rails"
 gem 'slim'
 gem 'sass'
 
+gem 'simple_form'
+
 gem 'draper'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

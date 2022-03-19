@@ -5,6 +5,6 @@
   .card-body
     .task-card-content
       p.lead #{task.title}
-      = link_to 'Open', task_path(task), class: 'btn btn-primary'
+      = link_to 'Open', task_path(task), class: 'btn btn-primary', data: { turbo_frame: '_top' }
     .task-card-options
       button.btn.btn-primary type="button"  Primary

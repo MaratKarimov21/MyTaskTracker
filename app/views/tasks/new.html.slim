@@ -1,2 +1,18 @@
 = turbo_frame_tag "modal" do
-  = render 'form', task: @task
+  .modal style='display: inline-block; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4);' data-controller="modal" data-action="keyup@document->modal#handleKeyup"
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header
+          h5.modal-title New Task
+          button.btn-close aria-label="Close" type="button" data-action="click->modal#close">
+        .modal-body
+          = simple_form_for @task do |form|
+            .mb-3
+              = form.input :title, class: 'form-control'
+            .mb-3
+              = form.input :description, as: :text, class: 'form-control'
+            .mb-3
+              = form.input :labels, collection: ['label1', 'label2', 'label3'], selected: ['label1', 'label2'], input_html: { multiple: true, class: 'form-select' }
+
+            .modal-footer
+              = form.button :submit, class: 'btn btn-primary'
