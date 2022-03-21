@@ -11,8 +11,8 @@
               = form.input :title, class: 'form-control'
             .mb-3
               = form.input :description, as: :text, class: 'form-control'
-            .mb-3
-              = form.input :labels, collection: ['label1', 'label2', 'label3'], selected: ['label1', 'label2'], input_html: { multiple: true, class: 'form-select' }
+            .mb-3 data-controller="tags"
+              = form.input :tags, class: 'form-control'
 
             .modal-footer
               = form.button :submit, class: 'btn btn-primary'
